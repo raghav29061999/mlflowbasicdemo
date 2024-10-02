@@ -1,7 +1,7 @@
 # The data set used in this example is from http://archive.ics.uci.edu/ml/datasets/Wine+Quality
 # P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis.
 # Modeling wine preferences by data mining from physicochemical properties. In Decision Support Systems, Elsevier, 47(4):547-553, 2009.
-
+import dagshub
 import os
 import warnings
 import sys
@@ -44,6 +44,8 @@ if __name__ == "__main__":
             "Unable to download training & test CSV, check your internet connection. Error: %s", e
         )
 
+    dagshub.init(repo_owner='raghav29061999', repo_name='mlflowbasicdemo', mlflow=True)
+    
     # Split the data into training and test sets. (0.75, 0.25) split.
     train, test = train_test_split(data)
 
@@ -76,9 +78,9 @@ if __name__ == "__main__":
         mlflow.log_metric("mae", mae)
 
         
-        # # For remote server only (Dagshub)
-        # remote_server_uri = "https://dagshub.com/entbappy/MLflow-Basic-Demo.mlflow"
-        # mlflow.set_tracking_uri(remote_server_uri)
+        # For remote server only (Dagshub)
+        remote_server_uri = "https://dagshub.com/raghav29061999/mlflowbasicdemo.mlflow"
+        mlflow.set_tracking_uri(remote_server_uri)
 
 
         # # For remote server only (AWS)
